@@ -15,21 +15,31 @@ namespace ProjectTranslateAPI.Controllers
 
         public IActionResult Index()
         {
-            var client = TranslationClient.Create();
-            TranslationResult result = client.TranslateText("It is raining.", LanguageCodes.Vietnamese);
-            var kq = $"Result: {result.TranslatedText}; detected language {result.DetectedSourceLanguage}";
             return View();
         }
-
-        public IActionResult Privacy()
+        [HttpPost]
+        public ResultObject Tranlation([FromBody]TranslateModel model)
         {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            ResultObject resultObject = new ResultObject() { Ok = false};
+            if(model != null)
+            {
+               var client = TranslationClient.Create();
+                if (model.Language == "VietNamese")
+                {
+                    TranslationResult result = client.TranslateText(model.Text, LanguageCodes.English);
+                    resultObject.Ok = true;
+                    resultObject.Content = result.TranslatedText;
+                    return resultObject;
+                }
+                else if(model.Language == "English")
+                {
+                    TranslationResult result = client.TranslateText(model.Text, LanguageCodes.Vietnamese);
+                    resultObject.Ok = true;
+                    resultObject.Content = result.TranslatedText;
+                    return resultObject;
+                }
+            }
+            return resultObject;
         }
     }
 }

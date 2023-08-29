@@ -2,7 +2,50 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="row" style="height:70vh;">
+    <div class="col-6">
+        <div class="dropdown mb-3">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                English
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <li><span class="dropdown-item" onclick="ChangeLanguage('en')">English</span></li>
+                <li><span class="dropdown-item" onclick="ChangeLanguage('vn')">VietNamese</span></li>
+            </ul>
+        </div>
+
+        <textarea class="w-100 h-50 p-2" id="textAreaInput"></textarea>
+    </div>
+    <div class="col-6">
+        <button class="mb-3 btn btn-secondary" id="resultLanguage">VietNamese</button>
+        <textarea id="resultTranslate" class="w-100 h-50 p-2" disabled></textarea>
+    </div>
 </div>
+
+<script>
+    $('#textAreaInput').on('input',(e)=>{
+        let Text = e.target.value;
+        let Language = $('#dropdownMenuButton1').text().trim();
+        $.ajax({
+            url: '@Url.Action("Tranlation", "Home")',
+            type: "post",
+            contentType: "application/json",
+            data: JSON.stringify({ Language, Text }),
+            success: function (result, status){
+                console.log(result);
+                if (result.ok) {
+                    $('#resultTranslate').text(result.content);
+                }
+            }
+        });
+    });
+    function ChangeLanguage(language){
+        if (language == 'vn'){
+            $('#dropdownMenuButton1').text('VietNamese');
+            $('#resultLanguage').text('English');
+        }else if(language == 'en'){
+            $('#dropdownMenuButton1').text('English');
+            $('#resultLanguage').text('VietNamese');
+        }
+    }
+</script>
