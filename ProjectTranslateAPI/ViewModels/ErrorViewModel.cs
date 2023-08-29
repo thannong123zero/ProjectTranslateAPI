@@ -1,4 +1,4 @@
-namespace ProjectTranslateAPI.Models
+namespace ProjectTranslateAPI.ViewModels
 {
     public class ErrorViewModel
     {

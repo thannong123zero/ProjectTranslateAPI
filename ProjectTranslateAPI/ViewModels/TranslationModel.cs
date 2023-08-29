@@ -1,6 +1,6 @@
-﻿namespace ProjectTranslateAPI.Models
+﻿namespace ProjectTranslateAPI.ViewModels
 {
-    public class TranslateModel
+    public class TranslationModel
     {
         public string Language { get; set; }
         public string Text { get; set; }

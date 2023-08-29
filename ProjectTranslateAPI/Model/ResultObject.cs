@@ -1,4 +1,4 @@
-﻿namespace ProjectTranslateAPI.Controllers
+﻿namespace ProjectTranslateAPI.Model
 {
     public class ResultObject
     {

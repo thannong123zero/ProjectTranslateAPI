@@ -48,17 +48,4 @@
             $('#resultLanguage').text('VietNamese');
         }
     }
-    $.ajax({
-        url: 'https://translation.googleapis.com/language/translate/v2?key=AIzaSyA6-E7E7Vspy3ilL4WIEF_rid8nFn0XRCU',
-        type: "post",
-        contentType: "application/json",
-        data: JSON.stringify({ "key":"AIzaSyA6-E7E7Vspy3ilL4WIEF_rid8nFn0XRCU",
-"q": "Trời đang mưa",
-  "source": "vi",
-  "target": "en",
-  "format": "text" }),
-        success: function (result, status) {
-            console.log(result);
-        }
-    });
 </script>
