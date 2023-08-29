@@ -23,7 +23,8 @@ namespace ProjectTranslateAPI.Controllers
             ResultObject resultObject = new ResultObject() { Ok = false};
             if(model != null)
             {
-               var client = TranslationClient.Create();
+                System.Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", @".\Resource\projecttranslateapi-397007-4c3ee3daa0e2.json");
+                var client = TranslationClient.Create();
                 if (model.Language == "VietNamese")
                 {
                     TranslationResult result = client.TranslateText(model.Text, LanguageCodes.English);
